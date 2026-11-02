@@ -68,3 +68,15 @@ references point to `201125166486`.
   `Identifier` nodes; anything with no whitespace or matching a technical pattern is a bug.
 - Use a **local** channel-ID fallback everywhere (`global.idcanal`/`channelRD`), never a
   hardcoded foreign newsletter JID.
+
+## الأمان والسرية
+
+- **ممنوع** كتابة أي مفتاح API في الكود. كل المفاتيح تُقرأ من متغيرات البيئة عبر `lib/secrets.js` (شوف `.env.example`).
+- فحص التاريخ: `gitleaks detect --source . --config .gitleaks.toml`.
+- الـpre-commit hook يمنع تسريب المفاتيح والملفات الحساسة: `bash tools/install-hooks.sh`.
+- التاريخ أُعيد بناؤه ليكون نظيفًا تمامًا (بلا أسرار ولا آثار مالك سابق).
+
+## المستودعات
+
+- البوت: https://github.com/dwhhhg8-code/FLASH-BOT-MD
+- المكتبة المصاحبة: https://github.com/dwhhhg8-code/--- (flash-baileys)
