@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# pre-commit hook: يمنع تسريب المفاتيح والملفات الحساسة قبل كل كوميت.
+# التثبيت: bash tools/install-hooks.sh
+set -u
+
+STAGED=$(git diff --cached --name-only --diff-filter=ACM)
+[ -z "$STAGED" ] && exit 0
+
+fail=0
+
+# 1) ملفات حساسة ما تتتبعش أبداً
+for f in $STAGED; do
+  case "$f" in
+    *.env|*.env.*|creds.json|pre-key-*.json|sender-key-*.json|app-state-sync-*.json|*.session|*.mdb|Sessions/*|الجلسات/*)
+      [ "$f" = ".env.example" ] && continue
+      echo "✖ ممنوع تتبع ملف حساس: $f"
+      fail=1
+      ;;
+  esac
+done
+
+# 2) أنماط مفاتيح معروفة داخل المحتوى المرحّل
+PATTERNS='AIza[0-9A-Za-z_-]{35}|2b11e512[a-f0-9]{100,}|nyx_[A-Za-z0-9_-]{16,}|owner_[a-f0-9]{20,}|(APIOWO|NYX|IMGBB|ACRCLOUD|PEXELS|PIXABAY|TENOR|RULE34|YOSOYO)[A-Z_]*(KEY|TOKEN|SECRET)[[:space:]]*[:=][[:space:]]*["'"'"'][A-Za-z0-9_-]{16,}'
+for f in $STAGED; do
+  [ -f "$f" ] || continue
+  case "$f" in
+    lib/secrets.js|.env.example|.gitleaks.toml) continue ;;
+  esac
+  if grep -nE "$PATTERNS" "$f" >/dev/null 2>&1; then
+    echo "✖ مفتاح مضمّن في: $f"
+    grep -nE "$PATTERNS" "$f" | head -3
+    fail=1
+  fi
+done
+
+if [ "$fail" -ne 0 ]; then
+  echo ""
+  echo "❌ الكوميت اتلغى. انقل المفاتيح لمتغيرات بيئة (شوف .env.example و lib/secrets.js)."
+  echo "   للتجاوز الطارئ: git commit --no-verify"
+  exit 1
+fi
+exit 0

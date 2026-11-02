@@ -1,0 +1,28 @@
+# إعدادات gitleaks لمنع تسريب المفاتيح مستقبلاً.
+# التشغيل: gitleaks detect --source . --config .gitleaks.toml
+title = "FLASH BOT secret rules"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "ملفات وأماكن مستثناة من الفحص"
+paths = [
+  '''node_modules/''',
+  '''package-lock\.json''',
+  '''\.env\.example$''',
+  '''lib/secrets\.js$''',
+]
+
+# قواعد إضافية لمفاتيح الخدمات المستخدمة في المشروع.
+[[rules]]
+id = "flash-bot-api-key"
+description = "مفاتيح الخدمات الخارجية المضمّنة في الكود (يجب أن تأتي من متغيرات البيئة)"
+regex = '''(?i)(APIOWO|NYX|IMGBB|ACRCLOUD|PEXELS|PIXABAY|TENOR|RULE34|YOSOYO)[A-Z_]*(?:KEY|TOKEN|SECRET|ID)\s*[:=]\s*['"][A-Za-z0-9_\-]{16,}['"]'''
+tags = ["key", "secret"]
+
+[[rules]]
+id = "google-api-key"
+description = "مفتاح Google API مضمّن"
+regex = '''AIza[0-9A-Za-z_\-]{35}'''
+tags = ["key", "google"]

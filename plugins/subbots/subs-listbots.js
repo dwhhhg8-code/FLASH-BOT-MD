@@ -1,0 +1,191 @@
+import ws from "ws"
+import axios from "axios"
+import { generateWAMessageContent, generateWAMessageFromContent, proto } from '@whiskeysockets/baileys'
+
+const getAdditionalNode = (name) => {
+  return [{
+    tag: 'biz',
+    attrs: { actual_actors: '2', host_storage: '2' },
+    content: [{
+      tag: 'interactive',
+      attrs: { type: 'native_flow', v: '1' },
+      content: [{
+        tag: 'native_flow',
+        attrs: { v: '9', name: 'mixed' },
+        content: []
+      }]
+    }]
+  }]
+}
+
+const IMAGEN_CARRUSEL = "https://files.catbox.moe/mwhyfm.jpg"
+const CANAL_OFICIAL = "https://whatsapp.com/channel/0029VbArz9fAO7RGy2915k3O"
+const MAX_SUBBOTS = 20
+const TARJETAS_POR_MENSAJE = 10
+const MEDIA_TIMEOUT_MS = 15000
+
+function convertirMsADiasHorasMinutosSegundos(ms) {
+  const segundos = Math.floor(Math.max(0, Number(ms) || 0) / 1000)
+  const minutos = Math.floor(segundos / 60)
+  const horas = Math.floor(minutos / 60)
+  const días = Math.floor(horas / 24)
+  const segRest = segundos % 60
+  const minRest = minutos % 60
+  const horasRest = horas % 24
+  let resultado = ""
+  if (días) resultado += `${días}d `
+  if (horasRest) resultado += `${horasRest}h `
+  if (minRest) resultado += `${minRest}m `
+  if (segRest) resultado += `${segRest}s`
+  return resultado.trim() || 'أقل من 1 ثانية'
+}
+
+function normalizarJid(user) {
+  for (const value of [user?.jid, user?.id]) {
+    if (typeof value !== 'string') continue
+    const match = /^(\d+)(?::\d+)?@(s\.whatsapp\.net|c\.us|lid)$/.exec(value)
+    if (match) return `${match[1]}@${match[2] === 'c.us' ? 's.whatsapp.net' : match[2]}`
+  }
+  return null
+}
+
+function estaAbierto(sock) {
+  const socket = sock?.ws
+  const state = socket?.socket?.readyState ?? socket?.readyState
+  return state != null ? state === ws.OPEN : socket?.isOpen === true
+}
+
+async function conTiempoLimite(promise, ms) {
+  let timer
+  try {
+    return await Promise.race([
+      promise,
+      new Promise((_, reject) => {
+        timer = setTimeout(() => reject(new Error('انتهت المهلة')), ms)
+      }),
+    ])
+  } finally {
+    clearTimeout(timer)
+  }
+}
+
+const handler = async (m, { conn, usedPrefix = '.' }) => {
+  const principalJid = normalizarJid(global.conn?.user)
+  const vistos = new Set()
+  const conectados = (Array.isArray(global.conns) ? global.conns : []).flatMap(sock => {
+    const jid = normalizarJid(sock?.user)
+    if (!jid || !estaAbierto(sock) || jid === principalJid || vistos.has(jid)) return []
+    vistos.add(jid)
+    const inicio = Number(sock.uptime)
+    return [{
+      jid,
+      number: jid.endsWith('@s.whatsapp.net') ? jid.split('@')[0] : null,
+      name: String(sock.user.name || `الروبوت الفرعي ${vistos.size}`).slice(0, 100),
+      uptime: Number.isFinite(inicio) && inicio > 0
+        ? convertirMsADiasHorasMinutosSegundos(Date.now() - inicio)
+        : 'غير متوفر',
+    }]
+  })
+
+  const resumen = `🎃 *نسخ Coven المتصلة: ${conectados.length}/${MAX_SUBBOTS}* 🦇`
+  if (!conectados.length) {
+    return m.reply(`${resumen}\n\nلا توجد نسخ ظل نشطة في هذا الوقت.\nاستخدم \`${usedPrefix}code\` أو \`${usedPrefix}qr\` لربط نسخة بالظلال.`)
+  }
+
+  await m.reply(resumen)
+
+  const describir = (bot, i) => [
+    `🎃 استنساخ الظل ${i + 1} 🦇`,
+    `🕯️ الاسم: ${bot.name}`,
+    bot.number ? `🔢 https://wa.me/${bot.number}` : `🔢 المعرف: ${bot.jid}`,
+    `⏳ وقت النشاط: ${bot.uptime}`,
+  ].join('\n')
+
+  const enviarLista = async (desde = 0) => {
+    for (let offset = desde; offset < conectados.length; offset += TARJETAS_POR_MENSAJE) {
+      const lista = conectados.slice(offset, offset + TARJETAS_POR_MENSAJE)
+        .map((bot, i) => describir(bot, offset + i)).join('\n\n')
+      await m.reply(`📜🎃 *قائمة نسخ الظل المتصلة*\n\n${lista}`)
+    }
+  }
+
+  let enviados = 0
+  try {
+    let imageMessage
+    try {
+      const { data } = await axios.get(IMAGEN_CARRUSEL, {
+        responseType: 'arraybuffer',
+        timeout: MEDIA_TIMEOUT_MS,
+        maxContentLength: 5 * 1024 * 1024,
+      })
+      const contenido = await conTiempoLimite(generateWAMessageContent(
+        { image: Buffer.from(data) },
+        { upload: conn.waUploadToServer, mediaUploadTimeoutMs: MEDIA_TIMEOUT_MS }
+      ), MEDIA_TIMEOUT_MS)
+      imageMessage = contenido.imageMessage
+    } catch (error) {
+      console.warn('[الروبوتات] لا يمكن تحضير الصورة:', error?.message || error)
+    }
+    if (!imageMessage) return await enviarLista()
+
+    for (let offset = 0; offset < conectados.length; offset += TARJETAS_POR_MENSAJE) {
+      const lote = conectados.slice(offset, offset + TARJETAS_POR_MENSAJE)
+      const cards = lote.map((bot, i) => ({
+        body: { text: describir(bot, offset + i) },
+        footer: { text: '🎃 فلاش بوت • الهالوين 🦇' },
+        header: { title: `🎃 ${bot.name} 🦇`, hasMediaAttachment: true, imageMessage },
+        nativeFlowMessage: {
+          buttons: [
+            {
+              name: 'quick_reply',
+              buttonParamsJson: JSON.stringify({ display_text: '🎃 أن تكون روبوتًا فرعيًا 🦇', id: `${usedPrefix}code` }),
+            },
+            {
+              name: 'cta_url',
+              buttonParamsJson: JSON.stringify({ display_text: '🎃 القناة الرسمية 🦇', url: CANAL_OFICIAL, merchant_url: CANAL_OFICIAL }),
+            },
+          ],
+        },
+      }))
+      const content = {
+        viewOnceMessage: {
+          message: {
+            messageContextInfo: { deviceListMetadata: {}, deviceListMetadataVersion: 2 },
+            interactiveMessage: {
+              body: { text: `${resumen}\nموستراندو ${offset + 1}–${offset + lote.length}` },
+              footer: { text: 'حدد روبوتًا فرعيًا من الرف الدائري 🌿' },
+              header: { hasMediaAttachment: false },
+              carouselMessage: { cards, messageVersion: 1, carouselCardType: 1 },
+            },
+          },
+        },
+      }
+      const validationError = proto.Message.verify(content)
+      if (validationError) throw new Error(`مكتبة غير صالحة: ${validationError}`)
+      const messageContent = generateWAMessageFromContent(m.chat, proto.Message.fromObject(content), {
+        quoted: m,
+        userJid: normalizarJid(conn.user) || undefined,
+      })
+      if (!messageContent?.message || !messageContent?.key?.id) {
+        throw new Error('تعذر إنشاء رسالة دائري')
+      }
+      await conTiempoLimite(conn.relayMessage(m.chat, messageContent.message, {
+        messageId: messageContent.key.id,
+        additionalNodes: getAdditionalNode('interactive'),
+      }), MEDIA_TIMEOUT_MS)
+      enviados += lote.length
+    }
+    await enviarLista()
+  } catch (error) {
+    console.warn('[الروبوتات] فشل إرسال الرف الدائري:', error?.message || error)
+    await m.reply('⚠︎ لم أتمكن من إرسال الرف الدائري بالكامل. أترك لكم القائمة المعلقة:')
+    await enviarLista(enviados)
+  }
+}
+
+handler.tags = ["socket"]
+handler.help = ["bots"]
+handler.command = ["botlist", "listbots", "bots"]
+
+export { convertirMsADiasHorasMinutosSegundos, MAX_SUBBOTS, CANAL_OFICIAL, IMAGEN_CARRUSEL }
+export default handler

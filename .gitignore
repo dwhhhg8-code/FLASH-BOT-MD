@@ -1,0 +1,32 @@
+/Sessions
+node_modules
+package-lock.json
+bot.log
+
+database.json
+error.log
+*.log
+tmp/
+
+database/
+qr-bot.png
+
+# مسارات معرّبة (بقايا تعريب) + بيانات جلسة/قاعدة بيانات وقت التشغيل
+قاعدة البيانات/
+الجلسات/
+مجموعات.json
+غطاء ذاكرة التخزين المؤقت.json
+
+# بيانات حساسة: جلسات، مفاتيح، نسخ احتياطية
+.env
+.env.local
+!.env.example
+Sessions/
+creds.json
+pre-key-*.json
+sender-key-*.json
+app-state-sync-*.json
+*.mdb
+*.session
+*.zip
+*.bak

@@ -1,0 +1,46 @@
+let handler = async (m, { conn }) => {
+    const ctx = m.message?.extendedTextMessage?.contextInfo?.mentionedJid || [];
+    const fallback = Array.isArray(m.mentionedJid) ? m.mentionedJid : [];
+    const quoted = m.quoted?.sender ? [m.quoted.sender] : [];
+    const mentions = [...new Set([...ctx, ...fallback, ...quoted])];
+
+    if (mentions.length >= 2) {
+        const person1 = mentions[0];
+        const person2 = mentions[1];
+
+        const getDisplayName = async (jid) => {
+            let name = await conn.getName(jid);
+            if (name) return name;
+            return jid.split('@')[0];
+        };
+
+        const name1 = await getDisplayName(person1);
+        const name2 = await getDisplayName(person2);
+        const name3 = await getDisplayName(m.sender);
+
+        const pp = 'https://files.catbox.moe/r15z6m.jpg';
+
+        const trio = `\t\t*TRÍO VIOLENTOOOOO!*
+        
+${name1} y ${name2} tienen un *${Math.floor(Math.random() * 100)}%* التوافق كزوجين.
+Mientras que ${name1} y ${name3} tienen un *${Math.floor(Math.random() * 100)}%* التوافق.
+Y ${name2} y ${name3} tienen un *${Math.floor(Math.random() * 100)}%* التوافق.
+ما رأيك في الثلاثي؟ 😏`;
+
+        await conn.sendMessage(m.chat, {
+            image: { url: pp },
+            caption: trio,
+            mentions: [person1, person2, m.sender]
+        }, { quoted: m });
+    } else {
+        await conn.reply(m.chat, `⚠️ يجب عليك ذكر مستخدمين حقيقيين بـ @ لحساب التوافق.`, m);
+    }
+}
+
+handler.help = ['formartrio @usuario1 @usuario2'];
+handler.tags = ['fun'];
+handler.command = ['formartrio'];
+handler.group = true;
+handler.register = true;
+
+export default handler;
