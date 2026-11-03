@@ -32,34 +32,34 @@ let handler = async (m, { conn, usedPrefix }) => {
 
     let comandosOwner = `
 *╭──* 🎃 \`ألعاب التراتومب\` *🦇*
-*│ 🕸️*  .morder @tag
-*│ 🕸️*  .8ball <pregunta>
-*│ 🕸️*  .afk [razón]
-*│ 🕸️*  .gay <@tag>
-*│ 🕸️*  .lesbiana <@tag>
-*│ 🕸️*  .pajero <@tag>
-*│ 🕸️*  .pajera <@tag>
-*│ 🕸️*  .puto <@tag>
-*│ 🕸️*  .puta <@tag>
-*│ 🕸️*  .manco <@tag>
-*│ 🕸️*  .manca <@tag>
-*│ 🕸️*  .rata <@tag>
-*│ 🕸️*  .prostituta <@tag>
-*│ 🕸️*  .prostituto <@tag>
-*│ 🕸️*  .confesar <número mensaje>
-*│ 🕸️*  .consejo
-*│ 🕸️*  .esclavizar
-*│ 🕸️*  .liberar
-*│ 🕸️*  .esclavos
-*│ 🕸️*  .formarpareja
-*│ 🕸️*  .formarpareja5
-*│ 🕸️*  .meme
-*│ 🕸️*  .nombrflash *<texto>*
-*│ 🕸️*  .pedido <mensaje>|<cantidad>
-*│ 🕸️*  .piropo
-*│ 🕸️*  .flashbug
-*│ 🕸️*  .top *<texto>*
-*│ 🕸️*  .formartrio @usuario1 @usuario2
+*│ 🕸️*  .عض @tag
+*│ 🕸️*  .8ball <سؤال>
+*│ 🕸️*  .غايب [razón]
+*│ 🕸️*  .نسبه <@منشن>
+*│ 🕸️*  .ليزبيان <@منشن>
+*│ 🕸️*  .باجيرو <@منشن>
+*│ 🕸️*  .باجيرا <@منشن>
+*│ 🕸️*  .عاهر2 <@منشن>
+*│ 🕸️*  .قحبه <@منشن>
+*│ 🕸️*  .مانكو <@منشن>
+*│ 🕸️*  .مانكا <@منشن>
+*│ 🕸️*  .فار <@منشن>
+*│ 🕸️*  .شرموطه <@منشن>
+*│ 🕸️*  .عاهر <@منشن>
+*│ 🕸️*  .اعترف <رقم رسالة>
+*│ 🕸️*  .نصيحه
+*│ 🕸️*  .استعبد
+*│ 🕸️*  .تحرير
+*│ 🕸️*  .العبيد
+*│ 🕸️*  .زوجني
+*│ 🕸️*  .خمسهازواج
+*│ 🕸️*  .ميمز
+*│ 🕸️*  .اسمك *<نص>*
+*│ 🕸️*  .طلبات <رسالة>|<كمية>
+*│ 🕸️*  .غازل
+*│ 🕸️*  .شادوباج
+*│ 🕸️*  .توب *<نص>*
+*│ 🕸️*  .ثلاثي @usuario1 @usuario2
 *╰─────────────╯*`.trim()
 
     let finalMenu = infoUser + '\n\n' + comandosOwner

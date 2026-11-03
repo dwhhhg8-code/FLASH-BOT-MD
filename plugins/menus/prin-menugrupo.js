@@ -32,67 +32,67 @@ let handler = async (m, { conn, usedPrefix }) => {
 
     let comandosGrupo = `
 *╭──* 🎃 \`دوائر أكويلاري\` *🦇*
-*│ 🕸️*  .banearbot
-*│ 🕸️*  .cerrar <número> segundos/minutos/horas
-*│ 🕸️*  .close
-*│ 🕸️*  .open
-*│ 🕸️*  .delete
-*│ 🕸️*  .delprimary
-*│ 🕸️*  .demote
-*│ 🕸️*  .encuesta <opción1|opción2|...>
-*│ 🕸️*  .fantasmas
-*│ 🕸️*  .kickfantasmas
-*│ 🕸️*  .infogrupo
-*│ 🕸️*  .invocar
-*│ 🕸️*  .kick
-*│ 🕸️*  .lid
-*│ 🕸️*  .lidnum
-*│ 🕸️*  .lid <@mención|número>
-*│ 🕸️*  .listonline
-*│ 🕸️*  .link
-*│ 🕸️*  .profile
-*│ 🕸️*  .promote
-*│ 🕸️*  .rastrear
-*│ 🕸️*  .revoke
-*│ 🕸️*  .gpbanner
-*│ 🕸️*  .groupimg
-*│ 🕸️*  .gpdesc
-*│ 🕸️*  .groupdesc
-*│ 🕸️*  .gpname
-*│ 🕸️*  .groupname
-*│ 🕸️*  .setprimary
-*│ 🕸️*  .desbanearbot
-*│ 🕸️*  .welcome
-*│ 🕸️*  .welcome @usuario *🦇*
-*│ 🕸️*  .welcome
-*│ 🕸️*  .bienvenida
-*│ 🕸️*  .antiprivado
-*│ 🕸️*  .antiprivate
-*│ 🕸️*  .restrict
-*│ 🕸️*  .restringir
-*│ 🕸️*  .autolevelup
-*│ 🕸️*  .autonivel
-*│ 🕸️*  .autoaceptar
-*│ 🕸️*  .aceptarauto
-*│ 🕸️*  .autorechazar
-*│ 🕸️*  .rechazarauto
-*│ 🕸️*  .autoresponder
-*│ 🕸️*  .autorespond
-*│ 🕸️*  .modoadmin
-*│ 🕸️*  .soloadmin
-*│ 🕸️*  .reaction
-*│ 🕸️*  .reaccion
-*│ 🕸️*  .nsfw
-*│ 🕸️*  .modohorny
-*│ 🕸️*  .antispam
-*│ 🕸️*  .jadibotmd
-*│ 🕸️*  .modejadibot
-*│ 🕸️*  .subbots
-*│ 🕸️*  .detect
-*│ 🕸️*  .avisos
-*│ 🕸️*  .antilink
-*│ 🕸️*  .antifake
-*│ 🕸️*  .autoread
+*│ 🕸️*  .اقفلبوت
+*│ 🕸️*  .اقفلجروب <رقم> segundos/minutos/horas
+*│ 🕸️*  .اقفل
+*│ 🕸️*  .تشغيل
+*│ 🕸️*  .دليت
+*│ 🕸️*  .شيلالاساسي
+*│ 🕸️*  .تنزيل
+*│ 🕸️*  .استطلاع <خيار1|خيار2|...>
+*│ 🕸️*  .اشباح
+*│ 🕸️*  .اطردالاشباح
+*│ 🕸️*  .معلوماتجروب
+*│ 🕸️*  .استدعاء
+*│ 🕸️*  .اطرد
+*│ 🕸️*  .ايديجروب
+*│ 🕸️*  .رقمالمعرف
+*│ 🕸️*  .ايديجروب <@منشن|رقم>
+*│ 🕸️*  .المتصلين
+*│ 🕸️*  .لينك
+*│ 🕸️*  .بروفايل
+*│ 🕸️*  .ارفع
+*│ 🕸️*  .تتبع
+*│ 🕸️*  .استرجع
+*│ 🕸️*  .بنرالجروب
+*│ 🕸️*  .صورهالجروب
+*│ 🕸️*  .وصفجروب
+*│ 🕸️*  .وصفالجروب
+*│ 🕸️*  .اسمجروب
+*│ 🕸️*  .اسمالمجموعه
+*│ 🕸️*  .حددالاساسي
+*│ 🕸️*  .فكحظربوت
+*│ 🕸️*  .اهلاوسهلا
+*│ 🕸️*  .اهلاوسهلا @usuario *🦇*
+*│ 🕸️*  .اهلاوسهلا
+*│ 🕸️*  .ترحيب
+*│ 🕸️*  .ضدالخاص
+*│ 🕸️*  .ضدالبرايفت
+*│ 🕸️*  .قيد
+*│ 🕸️*  .منعالاوامر
+*│ 🕸️*  .رفعالمستويات
+*│ 🕸️*  .تلقائيالمستوي
+*│ 🕸️*  .قبولتلقائي
+*│ 🕸️*  .اقبلتلقائي
+*│ 🕸️*  .رفضتلقائي
+*│ 🕸️*  .ارفضتلقائي
+*│ 🕸️*  .رداوتوماتيك
+*│ 🕸️*  .ردتلقائي
+*│ 🕸️*  .وضعالادمن
+*│ 🕸️*  .للمالكفقط
+*│ 🕸️*  .اقلب
+*│ 🕸️*  .ردودفعل
+*│ 🕸️*  .اباحي
+*│ 🕸️*  .وضعالاباحي
+*│ 🕸️*  .ضدالسبام
+*│ 🕸️*  .دائم
+*│ 🕸️*  .وضعالبوتالفرعي
+*│ 🕸️*  .سوب
+*│ 🕸️*  .كشف
+*│ 🕸️*  .ذكرني
+*│ 🕸️*  .مانعالروابط
+*│ 🕸️*  .ضدالوهمي
+*│ 🕸️*  .قراءهتلقائيه
 *╰─────────────╯*`.trim()
 
     let finalMenu = infoUser + '\n\n' + comandosGrupo

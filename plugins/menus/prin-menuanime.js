@@ -32,37 +32,37 @@ let handler = async (m, { conn, usedPrefix }) => {
 
     let comandosAnime = `
 *╭──* 🎃 \`الأرواح الأركانية\` *🦇*
-*│ 🕸️*  .coffee/cafe @tag
-*│ 🕸️*  .cosplay
-*│ 🕸️*  .cuddle/acurrucarse @tag
-*│ 🕸️*  .dance/bailar @tag
-*│ 🕸️*  .eat/comer @tag
-*│ 🕸️*  .happy/feliz @tag
-*│ 🕸️*  .hello/hola @tag
-*│ 🕸️*  .hide @tag
-*│ 🕸️*  .hug/abrazar @tag
-*│ 🕸️*  .kill
-*│ 🕸️*  .matar @tag
-*│ 🕸️*  .kiss/besar @tag
-*│ 🕸️*  .kiss2
-*│ 🕸️*  .besar2 @tag
-*│ 🕸️*  .kisscheek @tag
-*│ 🕸️*  .laugh/reirse @tag
-*│ 🕸️*  .lean @tag
-*│ 🕸️*  .lick @tag
-*│ 🕸️*  .look @tag
+*│ 🕸️*  .قهوه/cafe @tag
+*│ 🕸️*  .كوسبلاي
+*│ 🕸️*  .اقترب/acurrucarse @tag
+*│ 🕸️*  .ارقص/bailar @tag
+*│ 🕸️*  .اكل/comer @tag
+*│ 🕸️*  .فرحان/feliz @tag
+*│ 🕸️*  .سلام/hola @tag
+*│ 🕸️*  .استخبى @tag
+*│ 🕸️*  .حضن/abrazar @tag
+*│ 🕸️*  .اقتل
+*│ 🕸️*  .اقتله @tag
+*│ 🕸️*  .كيس/besar @tag
+*│ 🕸️*  .بوسهقويه
+*│ 🕸️*  .بوسه2 @tag
+*│ 🕸️*  .بوسهخد @tag
+*│ 🕸️*  .اضحك/reirse @tag
+*│ 🕸️*  .اتسند @tag
+*│ 🕸️*  .الحس @tag
+*│ 🕸️*  .بص @tag
 *│ 🕸️*  .love2/enamorada @tag
-*│ 🕸️*  .morder @tag
-*│ 🕸️*  .pampering @tag
+*│ 🕸️*  .عض @tag
+*│ 🕸️*  .دللني @tag
 *│ 🕸️*  .patt/acariciar @tag
-*│ 🕸️*  .pout/pucheros @tag
+*│ 🕸️*  .عابس/pucheros @tag
 *│ 🕸️*  .pregg/embarazar @tag
-*│ 🕸️*  .sad/triste @tag
-*│ 🕸️*  .seduce/seducir @tag
-*│ 🕸️*  .slap/bofetada @tag
-*│ 🕸️*  .smoke @tag
-*│ 🕸️*  .waifu
-*│ 🕸️*  .yawn @tag
+*│ 🕸️*  .زعلان/triste @tag
+*│ 🕸️*  .اغوي/seducir @tag
+*│ 🕸️*  .صفعه/bofetada @tag
+*│ 🕸️*  .دخن @tag
+*│ 🕸️*  .وايفو
+*│ 🕸️*  .اتاوب @tag
 *╰─────────────╯*`.trim()
 
     let finalMenu = infoUser + '\n\n' + comandosAnime

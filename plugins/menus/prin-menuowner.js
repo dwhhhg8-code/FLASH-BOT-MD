@@ -32,32 +32,32 @@ let handler = async (m, { conn, usedPrefix }) => {
 
     let comandosOwner = `
 *╭──* 🎃 \`سيد الليل الأبدي\` *🦇*
-*│ 🕸️* .limpiar
-*│ 🕸️* .addowner <numero/@tag/responde>
-*│ 🕸️* .banuser <@tag>
+*│ 🕸️* .نضف
+*│ 🕸️* .اضفمالك <رقم/@منشن/بالرد>
+*│ 🕸️* .احظرمستخدم <@منشن>
 *│ 🕸️* .broadcastgroup
-*│ 🕸️* .bcgc
-*│ 🕸️* .limpiarsubbots
-*│ 🕸️* .delplugin
-*│ 🕸️* .removeplugin
-*│ 🕸️* .detectarsyntax
-*│ 🕸️* .dsowner
+*│ 🕸️* .بثجماعي
+*│ 🕸️* .امسحالسوبات
+*│ 🕸️* .امسحمكون
+*│ 🕸️* .شيلپلجن
+*│ 🕸️* .فحصالاكواد
+*│ 🕸️* .المطور
 *│ 🕸️* .$
-*│ 🕸️* .update
-*│ 🕸️* .followchannel <link>
+*│ 🕸️* .حديث
+*│ 🕸️* .قناه <رابط>
 *│ 🕸️* .getmeta
-*│ 🕸️* .getplugin *<nombre>*
+*│ 🕸️* .جيبمكون *<اسم>*
 *│ 🕸️* .groups
-*│ 🕸️* .grouplist
-*│ 🕸️* .ip <dirección>
-*│ 🕸️* .ptvch
-*│ 🕸️* .restart
-*│ 🕸️* .reunion
-*│ 🕸️* .meeting
-*│ 🕸️* .saveplugin
-*│ 🕸️* .spam2
-*│ 🕸️* .unbanuser <@tag>
-*│ 🕸️* .darcode <@user|number>
+*│ 🕸️* .مجموعه
+*│ 🕸️* .ايبي <عنوان>
+*│ 🕸️* .فيديودائريقناه
+*│ 🕸️* .ريستارت
+*│ 🕸️* .اجتماع2
+*│ 🕸️* .اجتماع
+*│ 🕸️* .احفظمكون
+*│ 🕸️* .سبام
+*│ 🕸️* .فك <@منشن>
+*│ 🕸️* .كودفرعي <@مستخدم|رقم>
 *╰─────────────╯*`.trim()
 
     let finalMenu = infoUser + '\n\n' + comandosOwner

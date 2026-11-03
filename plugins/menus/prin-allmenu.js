@@ -1,5 +1,6 @@
 import fetch from 'node-fetch'
 import { xpRange } from '../../lib/levelling.js'
+import { arabicForCommand } from '../../lib/arabic-aliases.js'
 import fs from 'fs'
 import PhoneNumber from 'awesome-phonenumber'
 import moment from 'moment-timezone'
@@ -92,7 +93,7 @@ let handler = async (m, { conn, usedPrefix, __dirname, participants }) => {
     for (let tag in tags) {
       let comandos = commands
         .filter(cmd => cmd.tags.includes(tag))
-        .map(cmd => cmd.help.map(e => `*│ 🕸️*  ${usedPrefix}${e}`).join('\n'))
+        .map(cmd => cmd.help.map(e => `*│ 🕸️*  ${usedPrefix}${arabicForCommand(e)}`).join('\n'))
         .join('\n')
       if (comandos) {
         menuTexto += `\n*╭──* 🎃 \`${tags[tag]}\` *🦇*

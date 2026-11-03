@@ -41,21 +41,21 @@ let handler = async (m, { conn, usedPrefix }) => {
 
     let listaDescargas = `
 *╭──* 🎃 \`التنزيلات من التشفير\` *🦇*
-*│ 🕸️* ${usedPrefix}anime <nombre> 
-*│ 🕸️* ${usedPrefix}apk
-*│ 🕸️* ${usedPrefix}facebook
-*│ 🕸️* ${usedPrefix}fb
-*│ 🕸️* ${usedPrefix}instagram
-*│ 🕸️* ${usedPrefix}ig
-*│ 🕸️* ${usedPrefix}mediafire
-*│ 🕸️* ${usedPrefix}play
-*│ 🕸️* ${usedPrefix}mp3doc
-*│ 🕸️* ${usedPrefix}ytmp3doc
-*│ 🕸️* ${usedPrefix}mp4doc
-*│ 🕸️* ${usedPrefix}ytmp4doc
-*│ 🕸️* ${usedPrefix}spotify *<nombre|url>*
-*│ 🕸️* ${usedPrefix}tiktok
-*│ 🕸️* ${usedPrefix}wallpaper
+*│ 🕸️* ${usedPrefix}انمي <اسم> 
+*│ 🕸️* ${usedPrefix}تطبيق
+*│ 🕸️* ${usedPrefix}فيس
+*│ 🕸️* ${usedPrefix}فب
+*│ 🕸️* ${usedPrefix}انستا
+*│ 🕸️* ${usedPrefix}ايچي
+*│ 🕸️* ${usedPrefix}ميديافير
+*│ 🕸️* ${usedPrefix}تحميل
+*│ 🕸️* ${usedPrefix}ملفصوت
+*│ 🕸️* ${usedPrefix}يوتيوبصوت2
+*│ 🕸️* ${usedPrefix}فيديوكمستند
+*│ 🕸️* ${usedPrefix}يوتيوبفيديو2
+*│ 🕸️* ${usedPrefix}سبوتيفاي *<اسم|رابط>*
+*│ 🕸️* ${usedPrefix}تيكتوك
+*│ 🕸️* ${usedPrefix}خلفيه
 *╰─────────────╯*
 `.trim()
 

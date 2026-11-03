@@ -11,10 +11,13 @@ references point to `201125166486`.
   local HTTP server and point `APIOWO_BASE` / `XBOORU_BASE`+`PURRBOT_BASE` at it, so they
   no longer depend on live APIs (a module-level env read means the server must start before
   the plugin import).
-- Arabic aliases: `lib/arabic-aliases.js` maps ~516 Egyptian-Arabic phrases to real
-  commands. `tests/arabic-fixes.test.js` asserts every target exists in a plugin
-  (scanner also handles chained `handler.command = handler.help = [...]` and
-  obfuscated `]=[...]` assignments). Add aliases only for commands that exist.
+- Arabic aliases: `lib/arabic-aliases.js` maps every command to an Egyptian-Arabic
+  phrase (full coverage — `arabicCoreAliases` + `arabicExtraAliases`, ~990 phrases).
+  `tests/arabic-fixes.test.js` asserts both directions: every alias target exists in a
+  plugin, and every plugin command has at least one Arabic alias (scanner also handles
+  chained `handler.command = handler.help = [...]` and obfuscated `]=[...]` assignments).
+  Add aliases only for commands that exist; keys must have no spaces (commands are split
+  on whitespace).
 - Boot smoke: `printf "201125166486\n" | node src/index.js` → should load **270 plugins**, 0 load errors.
 
 ## External APIs

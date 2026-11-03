@@ -32,12 +32,12 @@ let handler = async (m, { conn, usedPrefix }) => {
 
     let comandosAi = `
 *╭──* 🎃 \`أوراكل وعقول غامضة\` *🦇*
-*│ 🕸️* ${usedPrefix}ai <pregunta>
-*│ 🕸️* ${usedPrefix}chatgpt <pregunta>
-*│ 🕸️* ${usedPrefix}copilot
-*│ 🕸️* ${usedPrefix}gemini
-*│ 🕸️* ${usedPrefix}simi
-*│ 🕸️* ${usedPrefix}venice
+*│ 🕸️* ${usedPrefix}ايهي <سؤال>
+*│ 🕸️* ${usedPrefix}جيبيتي <سؤال>
+*│ 🕸️* ${usedPrefix}ذكاء
+*│ 🕸️* ${usedPrefix}جيميني
+*│ 🕸️* ${usedPrefix}شات
+*│ 🕸️* ${usedPrefix}فينيس
 *╰─────────────╯*`.trim()
 
     let finalMenu = infoUser + '\n\n' + comandosAi

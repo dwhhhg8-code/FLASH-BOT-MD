@@ -32,36 +32,36 @@ let handler = async (m, { conn, usedPrefix }) => {
 
     let comandosHerras = `
 *╭──* 🎃 \`تحف الظل\` *🦇*
-*│ 🕸️* .audivd
-*│ 🕸️* .comprimir
-*│ 🕸️* .get
-*│ 🕸️* .gitclone
-*│ 🕸️* .githubstalk
-*│ 🕸️* .ghstalk
-*│ 🕸️* .github
+*│ 🕸️* .صوتيات
+*│ 🕸️* .كمبريمير
+*│ 🕸️* .جيت2
+*│ 🕸️* .ريبو
+*│ 🕸️* .ستوكجيتهاب
+*│ 🕸️* .تتبعجيتهاب
+*│ 🕸️* .جيت
 *│ 🕸️* .𝖧𝖽
-*│ 🕸️* .ibtn
-*│ 🕸️* .imgbbflash
-*│ 🕸️* .inspect <enlace>
-*│ 🕸️* .inspeccionar <enlace>
-*│ 🕸️* .idgp
-*│ 🕸️* .gp
+*│ 🕸️* .ازرار
+*│ 🕸️* .رفعصوره
+*│ 🕸️* .افحصجروب <رابط>
+*│ 🕸️* .افحص2 <رابط>
+*│ 🕸️* .ايديالجروب
+*│ 🕸️* .جيبيه
 *│ 🕸️* .nombre
-*│ 🕸️* .ptv
-*│ 🕸️* .quozio
-*│ 🕸️* .reduce
-*│ 🕸️* .reducir
-*│ 🕸️* .remover
-*│ 🕸️* .removebg
-*│ 🕸️* .ssweb
-*│ 🕸️* .ss
-*│ 🕸️* .toimg
-*│ 🕸️* .tourl [servicio]
-*│ 🕸️* .translate
-*│ 🕸️* .ver
-*│ 🕸️* .whatmusic
-*│ 🕸️* .userptv
-*│ 🕸️* .say
+*│ 🕸️* .فيديودائري
+*│ 🕸️* .كوزيو
+*│ 🕸️* .صغر
+*│ 🕸️* .ريدوسير
+*│ 🕸️* .ريموفر
+*│ 🕸️* .شيلخلفيه
+*│ 🕸️* .تصوير
+*│ 🕸️* .اساس
+*│ 🕸️* .صورة
+*│ 🕸️* .رابط [servicio]
+*│ 🕸️* .ترجم
+*│ 🕸️* .فير
+*│ 🕸️* .الاغنيه
+*│ 🕸️* .فيديوبروفايل
+*│ 🕸️* .قلد
 *╰─────────────╯*`.trim()
 
     let finalMenu = infoUser + '\n\n' + comandosHerras

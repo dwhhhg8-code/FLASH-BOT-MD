@@ -114,6 +114,39 @@ test('every Arabic alias points to a real plugin command', () => {
   assert.deepEqual(orphans, [], `aliases point to non-existent commands:\n${orphans.join('\n')}`);
 });
 
+test('every plugin command is reachable through an Arabic alias', () => {
+  const pluginsDir = path.join(root, 'plugins');
+  const commands = new Set();
+  for (const file of walkJs(pluginsDir)) {
+    const src = fs.readFileSync(file, 'utf8');
+    const arrRe = /command\s*=\s*(?:[A-Za-z_$][\w$.]*\s*=\s*)*\[([^\]]+)\]/g;
+    let m;
+    while ((m = arrRe.exec(src))) {
+      for (const c of m[1].split(',')) {
+        const v = c.trim().replace(/^['"`]|['"`]$/g, '');
+        if (/^[a-zA-Z0-9_]+$/.test(v)) commands.add(v);
+      }
+    }
+    const rxRe = /command\s*[:=]\s*\/\^?\(?([^/]+)\)?\$?\/i?/g;
+    while ((m = rxRe.exec(src))) {
+      for (const c of m[1].split('|')) {
+        const v = c.replace(/\\/g, '').trim();
+        if (/^[a-zA-Z0-9_]+$/.test(v)) commands.add(v);
+      }
+    }
+    const idxRe = /\]\s*=\s*\[([^\]]+)\]/g;
+    while ((m = idxRe.exec(src))) {
+      for (const c of m[1].split(',')) {
+        const v = c.trim().replace(/^['"`]|['"`]$/g, '');
+        if (/^[a-zA-Z0-9_]+$/.test(v)) commands.add(v);
+      }
+    }
+  }
+  const aliased = new Set(Object.values(arabicAliases));
+  const uncovered = [...commands].filter((c) => !aliased.has(c)).sort();
+  assert.deepEqual(uncovered, [], `commands without an Arabic alias:\n${uncovered.join('\n')}`);
+});
+
 test('resolveArabicAlias leaves unknown and non-Arabic commands untouched', () => {
   assert.equal(resolveArabicAlias('menu'), 'menu');
   assert.equal(resolveArabicAlias(''), '');
